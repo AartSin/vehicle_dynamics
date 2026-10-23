@@ -1,0 +1,1 @@
+{% assign s = include.status | default: "planned" | downcase %}{% if s == "done" %}<span class="status">finished</span>{% elsif s == "in progress" or s == "in-progress" or s == "wip" %}<span class="status wip">in progress</span>{% else %}<span class="status plan">planned</span>{% endif %}

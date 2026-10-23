@@ -1,0 +1,22 @@
+<section class="demo" aria-labelledby="demo-title">
+  <h2 id="demo-title">Try it</h2>
+  <p>A JavaScript copy of the same linear bicycle model, so it runs in the browser. Steer step of the front wheels at t = 0.2 s, constant speed, wheelbase 2.7 m, I<sub>z</sub> taken as m·a·b.</p>
+  <div class="demo-grid">
+    <div class="ctl">
+      <label for="s-u">Speed <output id="o-u"></output><input type="range" id="s-u" min="5" max="40" step="1" value="20"></label>
+      <label for="s-d">Steer angle <output id="o-d"></output><input type="range" id="s-d" min="0.5" max="5" step="0.1" value="2"></label>
+      <label for="s-m">Mass <output id="o-m"></output><input type="range" id="s-m" min="200" max="2500" step="10" value="1500"></label>
+      <label for="s-a">CG to front axle, a <output id="o-a"></output><input type="range" id="s-a" min="0.8" max="1.9" step="0.01" value="1.2"></label>
+      <label for="s-cf">C<sub>f</sub> <output id="o-cf"></output><input type="range" id="s-cf" min="20" max="160" step="1" value="80"></label>
+      <label for="s-cr">C<sub>r</sub> <output id="o-cr"></output><input type="range" id="s-cr" min="20" max="160" step="1" value="95"></label>
+      <button type="button" id="demo-reset">Reset</button>
+    </div>
+    <div class="out">
+      <p class="small">K = <span id="r-k"></span>, steady-state yaw rate = <span id="r-r"></span> (<span id="r-b"></span>)</p>
+      <p class="small fig">Yaw rate [deg/s]</p>
+      <canvas id="c-yaw"></canvas>
+      <p class="small fig">Lateral acceleration [g]</p>
+      <canvas id="c-ay"></canvas>
+    </div>
+  </div>
+</section>

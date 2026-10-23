@@ -1,0 +1,39 @@
+# ------------------------------------------------------------
+# Site settings. Change the text between the quotes.
+# After editing this file, the site rebuilds on its own.
+# ------------------------------------------------------------
+title: "Alvin"
+tagline: "Vehicle dynamics models in MATLAB"
+description: "Motorsport Engineering student building vehicle dynamics and lap time simulation models in MATLAB."
+email: ""            # optional, e.g. "you@example.com"
+linkedin: ""         # optional, full link to your LinkedIn profile
+github_user: "AartSin"    # your GitHub username, used for the "View code" links
+repo: "vehicle_dynamics"   # the name of this repository on GitHub
+
+# If the site lives at username.github.io/vehicle_dynamics, keep this as "/vehicle_dynamics".
+# If it lives at username.github.io, set it to "".
+baseurl: "/vehicle_dynamics"
+
+# Each model page is a file in the _projects folder.
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+
+markdown: kramdown
+kramdown:
+  math_engine: mathjax
+
+exclude:
+  - README.md
+  - HOW-TO-EDIT.md
+  - models/
+  - Gemfile
+  - Gemfile.lock

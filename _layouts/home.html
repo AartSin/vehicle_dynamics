@@ -1,0 +1,22 @@
+---
+layout: default
+---
+<div class="intro">
+  {{ content }}
+</div>
+
+<h2 class="list-title">Projects</h2>
+<p class="list-note">{{ page.projects_intro }}</p>
+{% assign projects = site.projects | sort: "order" %}
+<ol class="projects">
+  {% for p in projects %}
+  <li>
+    {% if p.image %}<a class="thumb" href="{{ p.url | relative_url }}"><img src="{{ p.image | relative_url }}" alt=""></a>{% endif %}
+    <div>
+      <h3><a href="{{ p.url | relative_url }}">{{ p.title }}</a> {% include status.html status=p.status %}</h3>
+      <p>{{ p.summary }}</p>
+      <p class="small">{{ p.dof }}</p>
+    </div>
+  </li>
+  {% endfor %}
+</ol>

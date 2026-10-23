@@ -1,0 +1,27 @@
+---
+layout: default
+---
+{% assign projects = site.projects | sort: "order" %}
+<article class="project">
+  <h1>{{ page.title }}</h1>
+  <p class="small meta">
+    {% include status.html status=page.status %} · {{ page.dof }}{% if page.tools %} · {{ page.tools }}{% endif %}{% if page.updated %} · {{ page.updated }}{% endif %}
+    {% if page.code_path and site.github_user != "" %} · <a href="https://github.com/{{ site.github_user }}/{{ site.repo }}/tree/main/{{ page.code_path }}">code on GitHub</a>{% endif %}
+  </p>
+
+  {% if page.image %}<figure class="lead-fig"><img src="{{ page.image | relative_url }}" alt="{{ page.image_caption | default: page.title }}">{% if page.image_caption %}<figcaption class="small">{{ page.image_caption }}</figcaption>{% endif %}</figure>{% endif %}
+
+  <div class="prose">
+    {{ content }}
+  </div>
+
+  {% if page.demo %}{% include demo-{{ page.demo }}.html %}{% endif %}
+
+  <nav class="pager small">
+    {% for p in projects %}{% if p.url == page.url %}
+      {% assign i = forloop.index0 %}{% assign pi = i | minus: 1 %}{% assign n = i | plus: 1 %}
+      <span>{% if i > 0 %}← <a href="{{ projects[pi].url | relative_url }}">{{ projects[pi].title }}</a>{% endif %}</span>
+      <span>{% if projects[n] %}<a href="{{ projects[n].url | relative_url }}">{{ projects[n].title }}</a> →{% endif %}</span>
+    {% endif %}{% endfor %}
+  </nav>
+</article>

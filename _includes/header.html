@@ -1,0 +1,8 @@
+<header class="site-header">
+  <a class="name" href="{{ '/' | relative_url }}">{{ site.title }}</a>
+  <nav>
+    <a href="{{ '/' | relative_url }}">Projects</a>
+    <a href="{{ '/about/' | relative_url }}">About</a>
+    {% if site.github_user != "" %}<a href="https://github.com/{{ site.github_user }}">GitHub</a>{% endif %}
+  </nav>
+</header>
