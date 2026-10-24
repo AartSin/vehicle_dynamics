@@ -13,4 +13,4 @@ Vehicle dynamics and lap time simulation models in MATLAB, by Alvin (Motorsport 
 | D001 powertrain | Drivetrain sub-model | Engine to tyre torque | In progress |
 | Validation and correlation | To be decided | Check the simulation against real data | Planned |
 
-The code for each model is in the `models` folder. To edit the website, see [HOW-TO-EDIT.md](HOW-TO-EDIT.md).
+This repository holds the website only. The MATLAB code is kept private and is available on request. To edit the website, see [HOW-TO-EDIT.md](HOW-TO-EDIT.md).

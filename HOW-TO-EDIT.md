@@ -50,6 +50,8 @@ Edit `_config.yml`. Those details appear in the header and footer of every page.
 - Home page intro text: `index.md`
 - About page: `about.md`
 
-## Where the MATLAB code goes
+## MATLAB code
 
-Put each model's code in the `models` folder, for example `models/C001-four-wheel-ggv/`. Then remove the `#` in front of `code_path` near the top of that model's page, and a "code on GitHub" link appears next to its title.
+The repository is public, so the MATLAB code is kept out of it. Each model page says "MATLAB code available on request" instead.
+
+If you later decide to share one model's code, put it in a folder such as `models/C001-four-wheel-ggv/`, then remove the `#` in front of `code_path` near the top of that model's page. The page then shows a "code on GitHub" link instead. Anything you add here can be read by anyone.

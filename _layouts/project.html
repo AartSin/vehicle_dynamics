@@ -6,7 +6,7 @@ layout: default
   <h1>{{ page.title }}</h1>
   <p class="small meta">
     {% include status.html status=page.status %} · {{ page.dof }}{% if page.tools %} · {{ page.tools }}{% endif %}{% if page.updated %} · {{ page.updated }}{% endif %}
-    {% if page.code_path and site.github_user != "" %} · <a href="https://github.com/{{ site.github_user }}/{{ site.repo }}/tree/main/{{ page.code_path }}">code on GitHub</a>{% endif %}
+    {% if page.code_path and site.github_user != "" %} · <a href="https://github.com/{{ site.github_user }}/{{ site.repo }}/tree/main/{{ page.code_path }}">code on GitHub</a>{% elsif page.status != "planned" %} · MATLAB code available on request{% endif %}
   </p>
 
   {% if page.image %}<figure class="lead-fig"><img src="{{ page.image | relative_url }}" alt="{{ page.image_caption | default: page.title }}">{% if page.image_caption %}<figcaption class="small">{{ page.image_caption }}</figcaption>{% endif %}</figure>{% endif %}
