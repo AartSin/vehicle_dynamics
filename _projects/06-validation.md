@@ -1,6 +1,6 @@
 ---
 title: "Validation and correlation"
-order: 6
+order: 8
 code: ""
 category: "Validation"
 status: planned
