@@ -17,7 +17,7 @@ image_caption: "Coventry FSUK car, ClA 6, FSEC 2025. A001 59.35 s against Optimu
 
 A001 is my first lap-time simulator. It is a point-mass, quasi-steady model that turns a car's grip, power and aero into a speed profile and a lap time. It answers first-order questions for a Formula Student car: what a unit of downforce is worth in lap time, and whether the car is grip-limited or power-limited.
 
-I matched OptimumLap's simplifications on purpose. With the same physics on both sides, any difference comes from my code, so OptimumLap works as a test bench for the solver.
+I matched OptimumLap's simplifications as closely as I could, so most remaining differences point to my code, and OptimumLap works as a test bench for the solver. The match is close, not identical: OptimumLap's 2WD rule is not published, wheel radius and drivetrain efficiency differ slightly, and interpolation and other implementation details may differ.
 
 ## Method
 
@@ -55,14 +55,15 @@ Laps repeat until lap time and start speed settle, which takes 3 laps.
 
 | Assumption | Effect on lap time |
 |---|---|
-| Constant μ: no load sensitivity, no load transfer | faster; aero benefit overstated |
-| Drive grip a fixed 0.45 of load (no rearward transfer) | slower out of corners |
+| Constant μ, no tyre load sensitivity | faster than real tyres; aero benefit overstated |
+| No load transfer (point mass) | with constant μ, total grip is unchanged, so no direct effect in this model; on a real car the direction depends on how each axle and combined slip limit, so it is not predictable from this model |
+| Drive grip a fixed 0.45 of tyre grip (no rearward transfer under acceleration) | likely slower out of corners |
 | Centreline, not racing line | slower |
 | No shift time, best gear always selected | faster |
 
 ## Verification: A/B against OptimumLap
 
-Same car, same track, same inputs in both tools. A001 test car: 200 kg, μ 1.4, grip from all four wheels.
+Same car data and track in both tools, with closely matched model assumptions. A001 test car: 200 kg, μ 1.4, grip from all four wheels.
 
 | ClA | OptimumLap [s] | A001 before [s] | A001 after [s] | Δ after |
 |---|---:|---:|---:|---:|
@@ -82,7 +83,7 @@ Bugs the A/B test found, largest first:
 
 **Rear-wheel drive.** OptimumLap does not publish how its 2WD option works. I tested two ways of copying it on the test car: cutting engine force to 45%, or limiting drive force to 45% of tyre grip (only the rear tyres push). Grip × 0.45 matched OptimumLap 2WD (+0.36 / −0.11 / −0.69 s at ClA 0.5 / 3 / 6); power × 0.45 did not (−1.88 / −1.66 / −0.79 s) and capped the Coventry car at 88 km/h. A001 uses λ = 0.45 on drive grip, in the forward pass only; braking uses all four tyres. λ = 0.45 copies OptimumLap's 2WD; it is not this car's rear weight share (0.53).
 
-**Coventry FSUK car against OptimumLap.** Same inputs in both tools (280 kg, Kawasaki turbo dyno map, μ<sub>x</sub> 1.6, μ<sub>y</sub> 1.55, ClA 6 / CdA 2.0, 2WD, overall ratio 7.6, rev limit 11,635 rpm, FSEC 2025 track), except wheel radius (A001 0.223 m, OptimumLap 0.23 m) and drivetrain efficiency (98% against 100%). Wheel radius does not affect lap time here: changing it from 0.2032 to 0.223 m moved no lap time by more than 0.001 s, because rear grip, not the engine, limits acceleration. Compared on lap time, top speed and minimum speed:
+**Coventry FSUK car against OptimumLap.** Matched inputs in both tools (280 kg, Kawasaki turbo dyno map, μ<sub>x</sub> 1.6, μ<sub>y</sub> 1.55, ClA 6 / CdA 2.0, 2WD, overall ratio 7.6, rev limit 11,635 rpm, FSEC 2025 track), except wheel radius (A001 0.223 m, OptimumLap 0.23 m) and drivetrain efficiency (98% against 100%). Wheel radius does not affect lap time here: changing it from 0.2032 to 0.223 m moved no lap time by more than 0.001 s, because rear grip, not the engine, limits acceleration. Compared on lap time, top speed and minimum speed:
 
 |  | OptimumLap 2WD | A001, λ 0.45 | Δ |
 |---|---:|---:|---:|
@@ -91,6 +92,18 @@ Bugs the A/B test found, largest first:
 | Minimum speed | 31.2 km/h | 31.3 km/h | +0.3% |
 
 OptimumLap values are from its exported results. Speed traces agree within 2 km/h over 81% of the lap (RMS 1.5 km/h). A λ sweep puts OptimumLap's lap between λ = 0.45 (59.35 s) and 0.50 (58.71 s), at about 0.47.
+
+**Parameter sources.** One value is fitted; the rest come from the car data sheet and were not tuned to OptimumLap.
+
+| Parameter | Value | Source |
+|---|---|---|
+| Drive-grip share λ | 0.45 | fitted: chosen to copy OptimumLap's 2WD (OptimumLap fits ≈ 0.47) |
+| Mass, tyre μ<sub>x</sub> / μ<sub>y</sub> | 280 kg, 1.6 / 1.55 | car data sheet |
+| Engine torque map | Kawasaki turbo dyno map | car data sheet |
+| Gear ratios, rev limit, wheel radius | overall 7.6, 11,635 rpm, 0.223 m | car data sheet |
+| Aero ClA / CdA | 6 / 2.0 | aero map |
+
+Because λ was chosen against OptimumLap, the 0.6% lap-time match is not fully independent. The minimum speed (31.3 against 31.2 km/h) is: it is the same for every λ from 0.45 to 0.55, because it is set by cornering grip, not drive grip.
 
 **The gap left grows with downforce:** 0.2 s at ClA 0.5, 0.8 s at ClA 6. The track is not the cause: my converted track matches OptimumLap's length and net heading exactly (985.06 m, −360.00°), with minimum radius 0.7% larger. Load sensitivity is not the cause either: it is switched off in the OptimumLap runs (both mass-friction terms are 0). The cause is not yet found.
 
