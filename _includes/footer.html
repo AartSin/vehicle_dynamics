@@ -1,5 +1,5 @@
 <footer class="site-footer">
-  {% if site.email != "" %}<span>{{ site.email }}</span>{% endif %}
+  {% if site.email != "" %}<a href="mailto:{{ site.email }}">{{ site.email }}</a>{% endif %}
   {% if site.linkedin != "" %}<a href="{{ site.linkedin }}">LinkedIn</a>{% endif %}
   {% if site.github_user != "" %}<a href="https://github.com/{{ site.github_user }}">GitHub</a>{% endif %}
   <span>Last updated {{ site.time | date: "%B %Y" }}</span>

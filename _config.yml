@@ -5,7 +5,7 @@
 title: "Alvin"
 tagline: "Vehicle dynamics models in MATLAB"
 description: "Motorsport Engineering student building vehicle dynamics and lap time simulation models in MATLAB."
-email: ""            # optional, e.g. "you@example.com"
+email: "sinc9@coventry.ac.uk"          # optional, e.g. "you@example.com"
 linkedin: ""         # optional, full link to your LinkedIn profile
 github_user: "AartSin"    # your GitHub username, used for the "View code" links
 repo: "vehicle_dynamics"   # the name of this repository on GitHub
