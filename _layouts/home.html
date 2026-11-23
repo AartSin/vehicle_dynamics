@@ -11,7 +11,7 @@ layout: default
 <ol class="projects">
   {% for p in projects %}
   <li>
-    {% if p.image %}<a class="thumb" href="{{ p.url | relative_url }}"><img src="{{ p.image | relative_url }}" alt=""></a>{% endif %}
+    {% if p.image and p.placeholder != true %}<a class="thumb" href="{{ p.url | relative_url }}"><img src="{{ p.image | relative_url }}" alt=""></a>{% endif %}
     <div>
       <h3><a href="{{ p.url | relative_url }}">{{ p.title }}</a> {% include status.html status=p.status %}</h3>
       <p>{{ p.summary }}</p>
