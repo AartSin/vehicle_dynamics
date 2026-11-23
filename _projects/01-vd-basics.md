@@ -3,7 +3,8 @@ title: "Vehicle dynamics basics"
 order: 1
 code: ""
 category: "Handling & ride"
-status: done              # done, in progress, or planned
+placeholder: true   # true hides the page content while it is being reworked; delete this line to show it again
+status: in progress              # done, in progress, or planned
 dof: "2 DOF quarter car · 2 DOF bicycle"
 purpose: "Learn the core handling and ride models"
 tools: "MATLAB"

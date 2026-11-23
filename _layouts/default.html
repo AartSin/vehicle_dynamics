@@ -21,7 +21,7 @@
     </main>
     {% include footer.html %}
   </div>
-  {% if page.demo %}
+  {% if page.demo and page.placeholder != true %}
   <script src="{{ '/assets/js/plot.js' | relative_url }}"></script>
   <script src="{{ '/assets/js/demo-' | append: page.demo | append: '.js' | relative_url }}"></script>
   {% endif %}
